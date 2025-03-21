@@ -20,7 +20,7 @@ export class AuthService {
         if (existingUser) throw new HttpException("The user is already registered!", HttpStatus.BAD_REQUEST);
 
         const hashedPassword = await bcrypt.hash(signupDto.password, 10);
-        console.log(hashedPassword, signupDto)
+    
         return this.databaseService.user.create({
             data: {
                 email: signupDto.email,
@@ -36,11 +36,13 @@ export class AuthService {
     async signin(signinDto: SigninDto) {
         const user = await this.databaseService.user.findUnique({where: {email: signinDto.email}});
         if (!user) throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
-        console.log(user)
+  
         const passwordMatches = user && await bcrypt.compare(signinDto.password, user.password);
         if (!passwordMatches) {
             throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
         }
-        return user;
+
+        const payload = { sub: user.id, email: user.email };
+        return { accessToken: this.jwtService.sign(payload) };
     } 
 }
