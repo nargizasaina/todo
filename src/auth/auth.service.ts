@@ -12,6 +12,10 @@ export class AuthService {
     ) {}
 
     async signup(signupDto: SignupDto) {
+        if (signupDto.password.length < 6) {
+            throw new HttpException('Pasword should be at least 6 symbols!', HttpStatus.BAD_REQUEST);
+        }
+
         if (signupDto.password !== signupDto.passwordConfirmation) {
             throw new HttpException('Paswords do not match!', HttpStatus.BAD_REQUEST);
         }

@@ -29,6 +29,9 @@ export class TasksService {
       where: {
         userId,
         ...(status && { status }),
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     });
   }
@@ -39,7 +42,7 @@ export class TasksService {
 
   async update(id: number, updateTaskDto: UpdateTaskDto, userId: number) {
     await this.checkTask(id, userId);
-console.log(updateTaskDto)
+
     return this.databaseService.task.update({
       where: {id, userId},
       data : updateTaskDto
