@@ -32,4 +32,4 @@ $ npm run test:e2e
 ```
 
 ## Swagger
-[localhost](http://localhost:4000/api)
+http://localhost:4000/api
