@@ -34,4 +34,16 @@ export class UsersService {
       }
     });
   }
+
+  async delete(id: number) {
+    await this.databaseService.task.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
+    
+    return this.databaseService.user.delete({ 
+      where: {id}
+    });
+  }
 }
