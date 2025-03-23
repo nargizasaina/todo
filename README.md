@@ -30,3 +30,6 @@ $ npm run start:dev
 # e2e tests
 $ npm run test:e2e
 ```
+
+## Swagger
+[localhost](http://localhost:4000/api)
