@@ -8,19 +8,20 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiOperation({summary: 'Get all users'})
+  @ApiOperation({summary: 'Get all users', description: 'Роут добавлен для проверки и тестирования'})
   @ApiResponse({status: 200})
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
-  @ApiOperation({summary: 'Get user by id'})
+  @ApiOperation({summary: 'Get user by id', description: 'Роут добавлен для проверки и тестирования'})
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
+  @ApiOperation({summary: 'Delete user', description: 'Роут добавлен для проверки и тестирования'})
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.delete(id);
